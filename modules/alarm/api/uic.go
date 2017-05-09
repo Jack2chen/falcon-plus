@@ -75,8 +75,8 @@ func GetUsers(teams string) map[string]*uic.User {
 	return userMap
 }
 
-// return phones, emails
-func ParseTeams(teams string) ([]string, []string) {
+// return phones, emails, IM
+func ParseTeams(teams string) ([]string, []string, []string) {
 	if teams == "" {
 		return []string{}, []string{}
 	}
@@ -84,11 +84,13 @@ func ParseTeams(teams string) ([]string, []string) {
 	userMap := GetUsers(teams)
 	phoneSet := set.NewStringSet()
 	mailSet := set.NewStringSet()
+	imSet := set.NewStringSet()
 	for _, user := range userMap {
 		phoneSet.Add(user.Phone)
 		mailSet.Add(user.Email)
+		imSet.Add(user.IM)
 	}
-	return phoneSet.ToSlice(), mailSet.ToSlice()
+	return phoneSet.ToSlice(), mailSet.ToSlice(), imSet.ToSlice()
 }
 
 func CurlUic(team string) []*uic.User {
