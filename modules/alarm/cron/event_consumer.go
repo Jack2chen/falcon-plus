@@ -3,6 +3,7 @@ package cron
 import (
 	"encoding/json"
 	log "github.com/Sirupsen/logrus"
+	"strings"
 
 	cmodel "github.com/open-falcon/falcon-plus/common/model"
 	"github.com/open-falcon/falcon-plus/modules/alarm/api"
@@ -46,9 +47,7 @@ func consumeHighEvents(event *cmodel.Event, action *api.Action) {
 
 	if len(IMs) > 0 {
 		log.Debugf("combined chat Ims is:%s", strings.Join(IMs, ","))
-	}
-	else
-	{
+	} else {
 		log.Debug("combined chat Ims is null")
 
 	}
